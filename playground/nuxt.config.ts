@@ -1,11 +1,11 @@
 export default defineNuxtConfig({
-  modules: ['../src/module'],
+    modules: ["../src/module"],
 
-  mcpB: {
-    autoInitialize: true,
-  },
+    mcpB: {
+        autoInitialize: true,
+    },
 
-  devtools: { enabled: true },
+    devtools: { enabled: true },
 
-  compatibilityDate: '2025-01-01',
-})
+    compatibilityDate: "2025-01-01",
+});

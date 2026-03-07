@@ -1,5 +1,5 @@
-import { initializeWebModelContext, cleanupWebModelContext } from '@mcp-b/global'
-import type { WebModelContextInitOptions } from '@mcp-b/global'
+import { initializeWebModelContext, cleanupWebModelContext } from "@mcp-b/global";
+import type { WebModelContextInitOptions } from "@mcp-b/global";
 
 /**
  * Composable providing direct access to @mcp-b/global initialization functions.
@@ -20,16 +20,16 @@ import type { WebModelContextInitOptions } from '@mcp-b/global'
  * ```
  */
 export function useMcpB() {
-  return {
-    /**
-     * Initialize or re-initialize the Web Model Context.
-     * No-op if already initialized.
-     */
-    initialize: (options?: WebModelContextInitOptions) => initializeWebModelContext(options),
+    return {
+        /**
+         * Initialize or re-initialize the Web Model Context.
+         * No-op if already initialized.
+         */
+        initialize: (options?: WebModelContextInitOptions) => initializeWebModelContext(options),
 
-    /**
-     * Tear down the adapter and restore navigator.modelContext to its original state.
-     */
-    cleanup: () => cleanupWebModelContext(),
-  }
+        /**
+         * Tear down the adapter and restore navigator.modelContext to its original state.
+         */
+        cleanup: () => cleanupWebModelContext(),
+    };
 }

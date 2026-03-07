@@ -21,15 +21,15 @@ npm run dev
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
+| Command               | Description                                       |
+| --------------------- | ------------------------------------------------- |
 | `npm run dev:prepare` | Stub build + generate types for local development |
-| `npm run dev` | Start the playground dev server |
-| `npm run dev:build` | Build the playground for production |
-| `npm run prepack` | Full production build of the module |
-| `npm run test` | Run tests |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run lint` | Lint the codebase |
+| `npm run dev`         | Start the playground dev server                   |
+| `npm run dev:build`   | Build the playground for production               |
+| `npm run prepack`     | Full production build of the module               |
+| `npm run test`        | Run tests                                         |
+| `npm run test:watch`  | Run tests in watch mode                           |
+| `npm run lint`        | Lint the codebase                                 |
 
 ## Project Structure
 

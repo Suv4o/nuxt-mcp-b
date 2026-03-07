@@ -1,11 +1,11 @@
-import McpBModule from '../../../src/module'
+import McpBModule from "../../../src/module";
 
 export default defineNuxtConfig({
-  modules: [McpBModule],
+    modules: [McpBModule],
 
-  mcpB: {
-    autoInitialize: true,
-  },
+    mcpB: {
+        autoInitialize: true,
+    },
 
-  compatibilityDate: '2025-01-01',
-})
+    compatibilityDate: "2025-01-01",
+});

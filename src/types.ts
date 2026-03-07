@@ -1,5 +1,1 @@
-export type {
-  ModuleOptions,
-  TransportConfiguration,
-  TransportServerOptions,
-} from './module'
+export type { ModuleOptions, TransportConfiguration, TransportServerOptions } from "./module";

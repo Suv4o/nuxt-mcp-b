@@ -32,8 +32,8 @@ pnpm add nuxt-mcp-b
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['nuxt-mcp-b'],
-})
+    modules: ["nuxt-mcp-b"],
+});
 ```
 
 That's it! `navigator.modelContext` is now available on every page. AI agents can discover and call any tools you register.
@@ -47,13 +47,13 @@ Use the auto-imported `useMcpTool` composable in any component. The tool is regi
 ```vue
 <script setup lang="ts">
 useMcpTool({
-  name: 'get-page-title',
-  description: 'Returns the current page title',
-  inputSchema: { type: 'object', properties: {} },
-  execute: async () => ({
-    content: [{ type: 'text', text: document.title }],
-  }),
-})
+    name: "get-page-title",
+    description: "Returns the current page title",
+    inputSchema: { type: "object", properties: {} },
+    execute: async () => ({
+        content: [{ type: "text", text: document.title }],
+    }),
+});
 </script>
 ```
 
@@ -62,23 +62,23 @@ useMcpTool({
 ```vue
 <script setup lang="ts">
 useMcpTool({
-  name: 'search-products',
-  description: 'Search the product catalog by query',
-  inputSchema: {
-    type: 'object',
-    properties: {
-      query: { type: 'string', description: 'Search query' },
-      limit: { type: 'integer', description: 'Max results to return' },
+    name: "search-products",
+    description: "Search the product catalog by query",
+    inputSchema: {
+        type: "object",
+        properties: {
+            query: { type: "string", description: "Search query" },
+            limit: { type: "integer", description: "Max results to return" },
+        },
+        required: ["query"],
     },
-    required: ['query'],
-  },
-  execute: async (args) => {
-    const results = await searchProducts(args.query as string, (args.limit as number) ?? 10)
-    return {
-      content: [{ type: 'text', text: JSON.stringify(results) }],
-    }
-  },
-})
+    execute: async (args) => {
+        const results = await searchProducts(args.query as string, (args.limit as number) ?? 10);
+        return {
+            content: [{ type: "text", text: JSON.stringify(results) }],
+        };
+    },
+});
 </script>
 ```
 
@@ -88,17 +88,17 @@ The `useMcpB` composable gives you direct control over the `@mcp-b/global` lifec
 
 ```vue
 <script setup lang="ts">
-const { initialize, cleanup } = useMcpB()
+const { initialize, cleanup } = useMcpB();
 
 // Re-initialize with custom options
 initialize({
-  transport: {
-    tabServer: { allowedOrigins: ['https://example.com'] },
-  },
-})
+    transport: {
+        tabServer: { allowedOrigins: ["https://example.com"] },
+    },
+});
 
 // Clean up when done
-onUnmounted(() => cleanup())
+onUnmounted(() => cleanup());
 </script>
 ```
 
@@ -109,28 +109,28 @@ Since the module initializes `@mcp-b/global` automatically, you can also use the
 ```vue
 <script setup lang="ts">
 onMounted(() => {
-  const registration = navigator.modelContext.registerTool({
-    name: 'add-to-cart',
-    description: 'Add a product to the shopping cart',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        productId: { type: 'string' },
-        quantity: { type: 'integer' },
-      },
-      required: ['productId'],
-    },
-    execute: async (args) => {
-      const item = await addToCart(args.productId, args.quantity ?? 1)
-      return {
-        content: [{ type: 'text', text: `Added ${item.name} to cart` }],
-      }
-    },
-  })
+    const registration = navigator.modelContext.registerTool({
+        name: "add-to-cart",
+        description: "Add a product to the shopping cart",
+        inputSchema: {
+            type: "object",
+            properties: {
+                productId: { type: "string" },
+                quantity: { type: "integer" },
+            },
+            required: ["productId"],
+        },
+        execute: async (args) => {
+            const item = await addToCart(args.productId, args.quantity ?? 1);
+            return {
+                content: [{ type: "text", text: `Added ${item.name} to cart` }],
+            };
+        },
+    });
 
-  // Optional: unregister later
-  onUnmounted(() => registration.unregister())
-})
+    // Optional: unregister later
+    onUnmounted(() => registration.unregister());
+});
 </script>
 ```
 
@@ -140,45 +140,45 @@ All options are optional. Configure them under the `mcpB` key in `nuxt.config.ts
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['nuxt-mcp-b'],
+    modules: ["nuxt-mcp-b"],
 
-  mcpB: {
-    // Auto-initialize @mcp-b/global on page load (default: true)
-    autoInitialize: true,
+    mcpB: {
+        // Auto-initialize @mcp-b/global on page load (default: true)
+        autoInitialize: true,
 
-    // Transport configuration
-    transport: {
-      // Tab server (same-window communication with browser extensions)
-      tabServer: {
-        allowedOrigins: ['*'],  // default
-        channelId: 'custom-channel',
-      },
-      // Iframe server (auto-enabled when page is in an iframe)
-      // Set to false to disable
-      iframeServer: {
-        allowedOrigins: ['https://parent-app.com'],
-      },
+        // Transport configuration
+        transport: {
+            // Tab server (same-window communication with browser extensions)
+            tabServer: {
+                allowedOrigins: ["*"], // default
+                channelId: "custom-channel",
+            },
+            // Iframe server (auto-enabled when page is in an iframe)
+            // Set to false to disable
+            iframeServer: {
+                allowedOrigins: ["https://parent-app.com"],
+            },
+        },
+
+        // Behavior when navigator.modelContext already exists natively
+        // 'preserve' (default) | 'patch'
+        nativeModelContextBehavior: "preserve",
+
+        // Whether to install the testing shim
+        // true | 'if-missing' (default) | 'always' | false
+        installTestingShim: "if-missing",
     },
-
-    // Behavior when navigator.modelContext already exists natively
-    // 'preserve' (default) | 'patch'
-    nativeModelContextBehavior: 'preserve',
-
-    // Whether to install the testing shim
-    // true | 'if-missing' (default) | 'always' | false
-    installTestingShim: 'if-missing',
-  },
-})
+});
 ```
 
 ### Options Reference
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `autoInitialize` | `boolean` | `true` | Whether to auto-initialize `@mcp-b/global` on page load. Set to `false` to initialize manually via `useMcpB().initialize()`. |
-| `transport` | `TransportConfiguration` | `undefined` | Configure `tabServer` and `iframeServer` transports. Each accepts `allowedOrigins` and `channelId`, or `false` to disable. |
-| `nativeModelContextBehavior` | `'preserve' \| 'patch'` | `'preserve'` | Behavior when `navigator.modelContext` already exists natively. `'preserve'` wraps native with BrowserMcpServer while mirroring core operations. |
-| `installTestingShim` | `boolean \| 'always' \| 'if-missing'` | `'if-missing'` | Controls the `modelContextTesting` shim installation. |
+| Option                       | Type                                  | Default        | Description                                                                                                                                      |
+| ---------------------------- | ------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `autoInitialize`             | `boolean`                             | `true`         | Whether to auto-initialize `@mcp-b/global` on page load. Set to `false` to initialize manually via `useMcpB().initialize()`.                     |
+| `transport`                  | `TransportConfiguration`              | `undefined`    | Configure `tabServer` and `iframeServer` transports. Each accepts `allowedOrigins` and `channelId`, or `false` to disable.                       |
+| `nativeModelContextBehavior` | `'preserve' \| 'patch'`               | `'preserve'`   | Behavior when `navigator.modelContext` already exists natively. `'preserve'` wraps native with BrowserMcpServer while mirroring core operations. |
+| `installTestingShim`         | `boolean \| 'always' \| 'if-missing'` | `'if-missing'` | Controls the `modelContextTesting` shim installation.                                                                                            |
 
 ## Testing Your WebMCP Tools
 
@@ -208,12 +208,12 @@ claude mcp add chrome-devtools npx @mcp-b/chrome-devtools-mcp@latest
 
 ```json
 {
-  "mcpServers": {
-    "chrome-devtools": {
-      "command": "npx",
-      "args": ["-y", "@mcp-b/chrome-devtools-mcp@latest"]
+    "mcpServers": {
+        "chrome-devtools": {
+            "command": "npx",
+            "args": ["-y", "@mcp-b/chrome-devtools-mcp@latest"]
+        }
     }
-  }
 }
 ```
 
@@ -233,12 +233,12 @@ Registers an MCP tool scoped to the component lifecycle. The tool is registered 
 
 **Parameters:**
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `name` | `string` | Unique tool identifier |
-| `description` | `string` | Human-readable description of what the tool does |
-| `inputSchema` | `{ type: 'object', properties: Record<string, unknown>, required?: string[] }` | JSON Schema for tool input parameters |
-| `execute` | `(args: Record<string, unknown>) => Promise<ToolResponse>` | Async handler that executes the tool and returns a response |
+| Property      | Type                                                                           | Description                                                 |
+| ------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------- |
+| `name`        | `string`                                                                       | Unique tool identifier                                      |
+| `description` | `string`                                                                       | Human-readable description of what the tool does            |
+| `inputSchema` | `{ type: 'object', properties: Record<string, unknown>, required?: string[] }` | JSON Schema for tool input parameters                       |
+| `execute`     | `(args: Record<string, unknown>) => Promise<ToolResponse>`                     | Async handler that executes the tool and returns a response |
 
 **`ToolResponse` format:**
 
@@ -253,14 +253,14 @@ Registers an MCP tool scoped to the component lifecycle. The tool is registered 
 
 Returns an object with two methods for manual lifecycle control:
 
-| Method | Description |
-|--------|-------------|
+| Method                 | Description                                                                                                                                                   |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `initialize(options?)` | Initialize or re-initialize the Web Model Context. No-op if already initialized. Accepts the same options as `@mcp-b/global`'s `initializeWebModelContext()`. |
-| `cleanup()` | Tear down the adapter and restore `navigator.modelContext` to its original state. |
+| `cleanup()`            | Tear down the adapter and restore `navigator.modelContext` to its original state.                                                                             |
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for development setup and guidelines.
+See [CONTRIBUTING.md](https://github.com/Suv4o/nuxt-mcp-b/blob/main/CONTRIBUTING.md) for development setup and guidelines.
 
 ## License
 

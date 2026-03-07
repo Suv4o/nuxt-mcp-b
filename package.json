@@ -34,7 +34,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch",
-    "release": "npm run prepack && npm publish"
+    "release": "npm run prepack && npm publish --//registry.npmjs.org/:_authToken=$npm_token"
   },
   "dependencies": {
     "@mcp-b/global": "^2.0.13",

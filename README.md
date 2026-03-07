@@ -258,24 +258,9 @@ Returns an object with two methods for manual lifecycle control:
 | `initialize(options?)` | Initialize or re-initialize the Web Model Context. No-op if already initialized. Accepts the same options as `@mcp-b/global`'s `initializeWebModelContext()`. |
 | `cleanup()` | Tear down the adapter and restore `navigator.modelContext` to its original state. |
 
-## Development
+## Contributing
 
-```bash
-# Install dependencies
-npm install
-
-# Prepare the module (stub build + generate types)
-npm run dev:prepare
-
-# Start the playground dev server
-npm run dev
-
-# Build the module for production
-npm run prepack
-
-# Run tests
-npm run test
-```
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for development setup and guidelines.
 
 ## License
 

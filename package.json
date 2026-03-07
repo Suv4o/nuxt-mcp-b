@@ -1,8 +1,17 @@
 {
     "name": "nuxt-mcp-b",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Nuxt module for @mcp-b/global — W3C Web Model Context API polyfill for AI agent integration",
     "license": "MIT",
+    "author": "Suv4o",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Suv4o/nuxt-mcp-b.git"
+    },
+    "homepage": "https://github.com/Suv4o/nuxt-mcp-b#readme",
+    "bugs": {
+        "url": "https://github.com/Suv4o/nuxt-mcp-b/issues"
+    },
     "type": "module",
     "exports": {
         ".": {

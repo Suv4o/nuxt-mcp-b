@@ -1,56 +1,56 @@
 {
-  "name": "nuxt-mcp-b",
-  "version": "0.1.0",
-  "description": "Nuxt module for @mcp-b/global — W3C Web Model Context API polyfill for AI agent integration",
-  "license": "MIT",
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/module.mjs"
+    "name": "nuxt-mcp-b",
+    "version": "0.1.1",
+    "description": "Nuxt module for @mcp-b/global — W3C Web Model Context API polyfill for AI agent integration",
+    "license": "MIT",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./dist/module.mjs"
+        }
+    },
+    "main": "./dist/module.mjs",
+    "files": [
+        "dist"
+    ],
+    "keywords": [
+        "nuxt",
+        "nuxt-module",
+        "mcp",
+        "mcp-b",
+        "model-context-protocol",
+        "web-model-context",
+        "ai-agents",
+        "ai-tools",
+        "navigator-modelcontext",
+        "w3c",
+        "polyfill"
+    ],
+    "scripts": {
+        "prepack": "nuxt-module-build build",
+        "dev": "npx nuxi dev playground",
+        "dev:build": "npx nuxi build playground",
+        "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && npx nuxi prepare playground",
+        "lint": "eslint .",
+        "test": "vitest run",
+        "test:watch": "vitest watch",
+        "release": "npm run prepack && npm publish --//registry.npmjs.org/:_authToken=$npm_token"
+    },
+    "dependencies": {
+        "@mcp-b/global": "^2.0.13",
+        "@nuxt/kit": "^4.3.1"
+    },
+    "devDependencies": {
+        "@nuxt/devtools": "latest",
+        "@nuxt/eslint-config": "^1.15.2",
+        "@nuxt/module-builder": "^1.0.2",
+        "@nuxt/schema": "^4.3.1",
+        "@nuxt/test-utils": "^4.0.0",
+        "eslint": "^10.0.3",
+        "nuxt": "^4.3.1",
+        "typescript": "^5.9.3",
+        "vitest": "^4.0.18",
+        "zod": "^4.3.6",
+        "zod-to-json-schema": "^3.25.1"
     }
-  },
-  "main": "./dist/module.mjs",
-  "files": [
-    "dist"
-  ],
-  "keywords": [
-    "nuxt",
-    "nuxt-module",
-    "mcp",
-    "mcp-b",
-    "model-context-protocol",
-    "web-model-context",
-    "ai-agents",
-    "ai-tools",
-    "navigator-modelcontext",
-    "w3c",
-    "polyfill"
-  ],
-  "scripts": {
-    "prepack": "nuxt-module-build build",
-    "dev": "npx nuxi dev playground",
-    "dev:build": "npx nuxi build playground",
-    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && npx nuxi prepare playground",
-    "lint": "eslint .",
-    "test": "vitest run",
-    "test:watch": "vitest watch",
-    "release": "npm run prepack && npm publish --//registry.npmjs.org/:_authToken=$npm_token"
-  },
-  "dependencies": {
-    "@mcp-b/global": "^2.0.13",
-    "@nuxt/kit": "^4.3.1"
-  },
-  "devDependencies": {
-    "@nuxt/devtools": "latest",
-    "@nuxt/eslint-config": "^1.15.2",
-    "@nuxt/module-builder": "^1.0.2",
-    "@nuxt/schema": "^4.3.1",
-    "@nuxt/test-utils": "^4.0.0",
-    "eslint": "^10.0.3",
-    "nuxt": "^4.3.1",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.18",
-    "zod": "^4.3.6",
-    "zod-to-json-schema": "^3.25.1"
-  }
 }

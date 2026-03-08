@@ -1,6 +1,6 @@
 {
     "name": "nuxt-mcp-b",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "Nuxt module for @mcp-b/global — W3C Web Model Context API polyfill for AI agent integration",
     "license": "MIT",
     "author": "Suv4o",

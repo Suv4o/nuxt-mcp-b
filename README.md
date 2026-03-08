@@ -180,6 +180,21 @@ export default defineNuxtConfig({
 | `nativeModelContextBehavior` | `'preserve' \| 'patch'`               | `'preserve'`   | Behavior when `navigator.modelContext` already exists natively. `'preserve'` wraps native with BrowserMcpServer while mirroring core operations. |
 | `installTestingShim`         | `boolean \| 'always' \| 'if-missing'` | `'if-missing'` | Controls the `modelContextTesting` shim installation.                                                                                            |
 
+## Limitations
+
+### Declarative API Not Supported
+
+The W3C Web Model Context API defines two ways to register tools:
+
+-   **Imperative API** (JavaScript) — `navigator.modelContext.registerTool()` — fully supported by this module
+-   **Declarative API** (HTML attributes) — `<form toolname="..." tooldescription="...">` — **not supported**
+
+The Declarative API allows you to turn HTML forms into tools using attributes like `toolname`, `tooldescription`, and `toolautosubmit`, without writing any JavaScript. However, the form-to-tool translation is a **native Chrome browser feature** — Chrome itself parses the DOM, detects annotated forms, and auto-registers them as tools behind the scenes.
+
+Since this module relies on the [`@mcp-b/global`](https://www.npmjs.com/package/@mcp-b/global) polyfill, which only implements the Imperative API, declarative form tools will not be discovered by AI agents when using the polyfill. They will work once Chrome's native WebMCP implementation is fully available (track progress via the `chrome://flags` "Experimental Web Platform features" flag).
+
+For more details, see [MCP Is Coming to the Browser](https://www.trpkovski.com/2026/03/08/mcp-is-coming-to-the-browser).
+
 ## Testing Your WebMCP Tools
 
 Once your site registers tools via this module, you need a way for AI agents to discover and call them. Here are two methods that work well.
